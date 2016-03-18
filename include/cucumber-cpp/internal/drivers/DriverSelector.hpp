@@ -4,4 +4,8 @@
     #include "BoostDriver.hpp"
 #elif defined(CPPSPEC_H_)
     #include "CppSpecDriver.hpp"
+#elif defined(QTEST_H)
+    #include "QtTestDriver.hpp"
 #endif
+
+

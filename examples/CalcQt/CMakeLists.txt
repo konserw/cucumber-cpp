@@ -31,6 +31,9 @@ else()
 endif()
 
 if(QT_LIBRARIES)
+    #QtTest driver - no additional dependencies
+    add_executable(QtTestCalculatorQtSteps features/step_definitions/QtTestCalculatorQtSteps)
+    target_link_libraries(QtTestCalculatorQtSteps libcalcqt ${QT_LIBRARIES} ${CUKE_LIBRARIES})
     if(Boost_UNIT_TEST_FRAMEWORK_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
         add_executable(BoostCalculatorQtSteps features/step_definitions/BoostCalculatorQtSteps)

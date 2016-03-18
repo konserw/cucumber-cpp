@@ -29,6 +29,24 @@ elseif(MSVC)
 endif()
 
 #
+# Qt
+#
+
+if(${Qt5Core_FOUND} AND ${Qt5Test_FOUND})
+    message(STATUS "Using Qt version ${Qt5Core_VERSION_STRING} ")
+    
+    # Find includes in corresponding build directories
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+    # Instruct CMake to run moc automatically when needed.
+    set(CMAKE_AUTOMOC ON)
+
+    # FIX: Qt was built with -reduce-relocations
+    if (Qt5_POSITION_INDEPENDENT_CODE)
+        SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
+    endif()
+endif()
+
+#
 # Boost
 #
 

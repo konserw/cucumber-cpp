@@ -15,7 +15,29 @@ set(CUKE_SOURCES
     connectors/wire/WireProtocolCommands.cpp
 )
 
-if(GMOCK_FOUND)
+# Find the Core library
+find_package(Qt5Core REQUIRED)
+# Find the QtTest library
+find_package(Qt5Test REQUIRED)
+
+if(${Qt5Core_FOUND} AND ${Qt5Test_FOUND})
+    message(STATUS "Using Qt version ${Qt5Core_VERSION_STRING} ")
+    
+    # Find includes in corresponding build directories
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+    # Instruct CMake to run moc automatically when needed.
+    set(CMAKE_AUTOMOC ON)
+
+    # FIX: Qt was built with -reduce-relocations
+    if (Qt5_POSITION_INDEPENDENT_CODE)
+        SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
+    endif()
+
+    include_directories(${Qt5Core_INCLUDE_DIRS})
+    list(APPEND CUKE_SOURCES drivers/QtTestDriver.cpp)
+endif()
+
+if(GTEST_FOUND)
     include_directories(${GTEST_INCLUDE_DIRS})
     list(APPEND CUKE_SOURCES drivers/GTestDriver.cpp)
 endif()
