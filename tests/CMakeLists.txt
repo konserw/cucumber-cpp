@@ -39,6 +39,16 @@ if(GMOCK_FOUND)
     cuke_add_driver_test(integration/drivers/GTestDriverTest ${CUKE_GTEST_LIBRARIES})
 endif()
 
+find_package(Qt5Core QUIET)
+find_package(Qt5Test QUIET)
+
+if(${Qt5Core_FOUND} AND ${Qt5Test_FOUND})
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+    set(CMAKE_AUTOMOC ON)
+    set(QT_LIBRARIES Qt5::Core Qt5::Test)
+    cuke_add_driver_test(integration/drivers/QtTestDriverTest ${QT_LIBRARIES})
+endif()
+
 if(CPPSPEC_FOUND)
     cuke_add_driver_test(integration/drivers/CppSpecDriverTest ${CPPSPEC_LIBRARY})
 endif()
