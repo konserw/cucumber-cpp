@@ -27,13 +27,14 @@ addons:
       - libboost-program-options-dev
       - libboost-test-dev
       - google-mock
+      - ninja-build
 
 script: ./travis.sh 
 
-notifications:
-  email:
-    - cukes-devs@googlegroups.com
-
-branches:
-  only:
-    - master
+#notifications:
+#  email:
+#    - cukes-devs@googlegroups.com
+#
+#branches:
+#  only:
+#    - master

@@ -1,12 +1,13 @@
 #!/bin/sh
 set -e #break script on non-zero exitcode from any command
 gem install bundler
+case $OSTYPE in darwin*) brew install ninja ;; esac
 
 cmake -E make_directory build
 if [ -z ${GMOCK_PATH+x} ]; then 
-    cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on -DGMOCK_VER=${GMOCK_VER} ..
+    cmake -E chdir build cmake -GNinja -DCUKE_ENABLE_EXAMPLES=on -DGMOCK_VER=${GMOCK_VER} ..
 else
-    cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on -DGMOCK_SRC_DIR=${GMOCK_PATH} ..
+    cmake -E chdir build cmake -GNinja -DCUKE_ENABLE_EXAMPLES=on -DGMOCK_SRC_DIR=${GMOCK_PATH} ..
 fi
 cmake --build build
 cmake --build build --target test
