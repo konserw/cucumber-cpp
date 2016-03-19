@@ -142,10 +142,10 @@ else()
     set(Suffix ".lib")
 endif()
 
-set(GTEST_LIBRARY      "${GMOCK_ROOT}/src/gmock-build/gtest/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}")
-set(GTEST_MAIN_LIBRARY "${GMOCK_ROOT}/src/gmock-build/gtest/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${Suffix}")
-set(GMOCK_LIBRARY      "${GMOCK_ROOT}/src/gmock-build/${CMAKE_FIND_LIBRARY_PREFIXES}gmock${Suffix}")
-set(GMOCK_MAIN_LIBRARY "${GMOCK_ROOT}/src/gmock-build/${CMAKE_FIND_LIBRARY_PREFIXES}gmock_main${Suffix}")
+set(GTEST_LIBRARY      "${GMOCK_ROOT}/src/gmock-build/gtest/${CMAKE_CFG_INTDIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}")
+set(GTEST_MAIN_LIBRARY "${GMOCK_ROOT}/src/gmock-build/gtest/${CMAKE_CFG_INTDIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${Suffix}")
+set(GMOCK_LIBRARY      "${GMOCK_ROOT}/src/gmock-build/${CMAKE_CFG_INTDIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gmock${Suffix}")
+set(GMOCK_MAIN_LIBRARY "${GMOCK_ROOT}/src/gmock-build/${CMAKE_CFG_INTDIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gmock_main${Suffix}")
 
 
 if("${GMOCK_SRC_DIR}" STREQUAL "") 
@@ -188,13 +188,6 @@ add_dependencies(libgmock gmock)
 add_library(libgtest IMPORTED STATIC GLOBAL)
 add_dependencies(libgtest gmock)
 ExternalProject_Get_Property(gmock source_dir binary_dir)
-
-if(MSVC) 
-    set(MS_DIR "/${CMAKE_BUILD_TYPE}") 
-endif()
-
-set(GTEST_LIB_DIR "${binary_dir}/gtest${MS_DIR}")
-set(GMOCK_LIB_DIR "${binary_dir}${MS_DIR}")
 
 set(GMOCK_INCLUDE_DIR ${source_dir}/include)
 mark_as_advanced(GMOCK_INCLUDE_DIR)
