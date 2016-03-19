@@ -39,6 +39,10 @@ if(GMOCK_FOUND)
     cuke_add_driver_test(integration/drivers/GTestDriverTest ${CUKE_GTEST_LIBRARIES})
 endif()
 
+if(${Qt5Core_FOUND} AND ${Qt5Test_FOUND})
+    cuke_add_driver_test(integration/drivers/QtTestDriverTest ${QT_LIBRARIES})
+endif()
+
 if(CPPSPEC_FOUND)
     cuke_add_driver_test(integration/drivers/CppSpecDriverTest ${CPPSPEC_LIBRARY})
 endif()

@@ -15,7 +15,13 @@ set(CUKE_SOURCES
     connectors/wire/WireProtocolCommands.cpp
 )
 
-if(GMOCK_FOUND)
+
+if(${Qt5Core_FOUND} AND ${Qt5Test_FOUND})
+    include_directories(${Qt5Core_INCLUDE_DIRS})
+    list(APPEND CUKE_SOURCES drivers/QtTestDriver.cpp)
+endif()
+
+if(GTEST_FOUND)
     include_directories(${GTEST_INCLUDE_DIRS})
     list(APPEND CUKE_SOURCES drivers/GTestDriver.cpp)
 endif()

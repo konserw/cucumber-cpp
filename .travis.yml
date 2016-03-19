@@ -19,6 +19,8 @@ matrix:
 
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
       - libboost-thread-dev 
       - libboost-system-dev
@@ -28,6 +30,7 @@ addons:
       - libboost-test-dev
       - google-mock
       - ninja-build
+      - qtbase5-dev
 
 script: ./travis.sh 
 
