@@ -16,12 +16,10 @@ matrix:
     - os: osx
       env: GMOCK_PATH=/usr/src/gmock
     - os: osx
-      compiler: gcc #does anyone on osx use it?
+      compiler: gcc
 
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
       - libboost-thread-dev 
       - libboost-system-dev
