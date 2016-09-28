@@ -29,6 +29,24 @@ elseif(MSVC)
 endif()
 
 #
+# Qt
+#
+
+find_package(Qt5Core QUIET)
+find_package(Qt5Widgets QUIET)
+find_package(Qt5Test QUIET)
+
+if(${Qt5Core_FOUND} AND ${Qt5Test_FOUND})
+    message(STATUS "Using Qt version: ${Qt5Core_VERSION_STRING}")
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+    set(CMAKE_AUTOMOC ON)
+    if (Qt5_POSITION_INDEPENDENT_CODE)
+        SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
+    endif()
+    set(QT_LIBRARIES Qt5::Core Qt5::Widgets Qt5::Test)
+endif()
+
+#
 # Boost
 #
 
