@@ -35,6 +35,7 @@ endif()
 find_package(Qt5Core QUIET)
 find_package(Qt5Widgets QUIET)
 find_package(Qt5Test QUIET)
+find_package(Qt5Concurrent QUIET)
 
 if(${Qt5Core_FOUND} AND ${Qt5Test_FOUND})
     message(STATUS "Using Qt version: ${Qt5Core_VERSION_STRING}")
