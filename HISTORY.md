@@ -2,12 +2,16 @@
 
 ### New Features
 
+* Add support for Unix sockets ([#126](https://github.com/cucumber/cucumber-cpp/pull/126) Giel van Schijndel)
+* Add support for using ephemeral ports ([#131](https://github.com/cucumber/cucumber-cpp/pull/131) Giel van Schijndel)
 * Removed CppSpec support ([#118](https://github.com/cucumber/cucumber-cpp/pull/118) Paolo Ambrosio)
 * Support for GoogleTest 1.8 ([#120](https://github.com/cucumber/cucumber-cpp/pull/120) Kamil Strzempowicz)
+* Disable Nagle on TCP socket ([#125](https://github.com/cucumber/cucumber-cpp/pull/125) Giel van Schijndel)
 
 ### Bugfixes
 
 * Fixed suggested step definition when step sentence contains double quote ([#116](https://github.com/cucumber/cucumber-cpp/issues/116) Kamil Strzempowicz, [fbc49a3](https://github.com/cucumber/cucumber-cpp/commit/fbc49a34e12a0b9b2a6e121d97ba1ad8f46dce8f) Paolo Ambrosio)
+* Fixed `defs.hpp` deprecation warning on MSVC ([#124](https://github.com/cucumber/cucumber-cpp/pull/124) Antoine Allard)
 
 ## [0.3.1](https://github.com/cucumber/cucumber-cpp/compare/v0.3...v0.3.1) (11 April 2016)
 
