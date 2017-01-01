@@ -15,7 +15,6 @@ set(CUKE_SOURCES
     connectors/wire/WireProtocolCommands.cpp
 )
 
-
 if(${Qt5Core_FOUND} AND ${Qt5Test_FOUND})
     include_directories(${Qt5Core_INCLUDE_DIRS})
     list(APPEND CUKE_SOURCES drivers/QtTestDriver.cpp)

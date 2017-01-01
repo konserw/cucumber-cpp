@@ -7,10 +7,12 @@ namespace cucumber {
 namespace internal {
 
 class QtTestStep : public BasicStep{
+    friend class QtTestObject;
+public:
+    QtTestStep(): BasicStep() {}
+
 protected:
     const InvokeResult invokeStepBody();
-
-    friend class QtTestObject;
 };
 
 #define STEP_INHERITANCE(step_name) ::cucumber::internal::QtTestStep

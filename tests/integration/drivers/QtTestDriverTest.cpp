@@ -25,39 +25,36 @@ THEN(PENDING_MATCHER_2) {
 
 using namespace cucumber::internal;
 
-class QtTestSteps : public QObject {
-Q_OBJECT
+class QtTestStepDouble : public QtTestStep {
 public:
-    QtTestSteps() {
-        isInitialized = false;
-        isCleanedUp = false;
+    QtTestStepDouble() : QtTestStep() {
+        testRun = false;
     }
-    bool isInitialized;
-    bool isCleanedUp;
-private slots:
-    void initTestCase()
-    { isInitialized = true; }
-    void myFirstTest()
-    { QVERIFY(1 == 1); }
-    void cleanupTestCase()
-    { isCleanedUp = true; }
+
+    const InvokeResult invokeStepBody() {
+        return QtTestStep::invokeStepBody();
+    }
+
+    void body() {
+        testRun = true;
+    }
+
+    bool testRun;
 };
 
 class QtTestDriverTest : public DriverTest {
 public:
     virtual void runAllTests() {
-        stepInvocationInitsQtTest();
+        stepInvocationRunsStepBody();
         DriverTest::runAllTests();
     }
 
 private:
-    void stepInvocationInitsQtTest() {
-        QtTestSteps framework;
-        QCOMPARE(framework.isInitialized, false);
-        QCOMPARE(framework.isCleanedUp, false);
-        QTest::qExec(&framework);
-        QCOMPARE(framework.isInitialized, true);
-        QCOMPARE(framework.isCleanedUp, true);
+    void stepInvocationRunsStepBody() {
+        QtTestStepDouble framework;
+        expectFalse("The test body has not been run", framework.testRun);
+        framework.invokeStepBody();
+        expectTrue("The test body has been run", framework.testRun);
     }
 };
 
@@ -66,4 +63,3 @@ int main() {
     return test.run();
 }
 
-#include "QtTestDriverTest.moc"
