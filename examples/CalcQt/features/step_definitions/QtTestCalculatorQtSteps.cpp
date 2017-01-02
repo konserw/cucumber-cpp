@@ -25,7 +25,7 @@ GIVEN("^I just turned on the calculator$") {
     calculator->move(0, 0);
     calculator->show();
 #if QT_VERSION >= 0x050000
-    QTest::qWaitForWindowExposed(calculator.get());
+    QTest::qWaitForWindowActive(calculator.get());
 #else
     QTest::qWaitForWindowShown(calculator.get());
 #endif

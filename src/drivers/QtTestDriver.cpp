@@ -1,14 +1,7 @@
 #include <cucumber-cpp/internal/drivers/QtTestDriver.hpp>
-
-#include <QtTest/QtTest>
-#include <QString>
-#include <QTextStream>
-#include <QTemporaryFile>
-#include <QBuffer>
-#include <QObject>
-#include <QFile>
-#include <cstdio>
 #include "cucumber-cpp/internal/utils/qtCapture.hpp"
+#include <QtConcurrent/QtConcurrent>
+#include <QtTest/QtTest>
 
 namespace cucumber {
 namespace internal {
@@ -16,8 +9,10 @@ namespace internal {
 class QtTestObject: public QObject {
     Q_OBJECT
 public:
-    QtTestObject(QtTestStep* qtTestStep): step(qtTestStep) {}
-    virtual ~QtTestObject() {}
+    QtTestObject(QtTestStep* qtTestStep): step(qtTestStep) {
+    }
+    virtual ~QtTestObject() {
+    }
 
 protected:
     QtTestStep* step;
@@ -28,8 +23,9 @@ private slots:
     }
 };
 
-const InvokeResult QtTestStep::invokeStepBody() {
-    QtTestObject testObject(this);
+
+InvokeResult runTestInAnotherThread(QtTestStep* step) {
+    QtTestObject testObject(step);
 
     qtCapture::Init();
     qtCapture::BeginCapture();
@@ -40,6 +36,11 @@ const InvokeResult QtTestStep::invokeStepBody() {
         return InvokeResult::success();
     else
         return InvokeResult::failure(qtCapture::GetCapture());
+
+}
+
+const InvokeResult QtTestStep::invokeStepBody() {
+    return QtConcurrent::run(runTestInAnotherThread, this).result();
 }
 
 }
