@@ -23,8 +23,11 @@ set(CMAKE_MODULE_PATH
 
 if(COVERAGE)
 	include(CodeCoverage)
-    setup_target_for_coverage(coverage test coverage)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -pthread -g -O0 -fprofile-arcs -ftest-coverage")
+    setup_target_for_coverage(
+        coverage
+        "ninja test"
+        coverage
+    )
 endif()
 
 #
