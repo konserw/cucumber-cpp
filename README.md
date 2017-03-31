@@ -1,5 +1,6 @@
 # Cucumber-CPP
 [![Join the chat at https://gitter.im/cucumber/cucumber-cpp](https://badges.gitter.im/cucumber/cucumber-cpp.svg)](https://gitter.im/cucumber/cucumber-cpp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/konserw/cucumber-cpp.svg?branch=master)](https://travis-ci.org/konserw/cucumber-cpp) [![Build status](https://ci.appveyor.com/api/projects/status/8i9vu5xy5qedo926?svg=true)](https://ci.appveyor.com/project/konserw/cucumber-cpp)
+[![Coverage Status](https://coveralls.io/repos/github/konserw/cucumber-cpp/badge.svg)](https://coveralls.io/github/konserw/cucumber-cpp)
 
 Cucumber-Cpp allows Cucumber to support step definitions written in C++.
 
