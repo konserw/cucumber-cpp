@@ -13,6 +13,7 @@ cmake -E chdir build cmake \
     -DCUKE_ENABLE_EXAMPLES=on \
     ${VALGRIND_TESTS:+"-DVALGRIND_TESTS=${VALGRIND_TESTS}"} \
     ${COVERALLS:+"-DCOVERALLS=${COVERALLS}"} \
+    ${COVERALLS:+"-DCMAKE_BUILD_TYPE=Debug"} \
     ${GMOCK_PATH:-"-DGMOCK_VER=${GMOCK_VER}"} \
     ${GMOCK_PATH:+"-DGMOCK_SRC_DIR=${GMOCK_PATH}"} \
     ..
