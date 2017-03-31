@@ -164,7 +164,6 @@ add_subdirectory(src)
 #
 
 if(COVERALLS)
-message("==============Cover sources: ${COVER_SOURCES}")
 	coveralls_setup(
         "${COVER_SOURCES}" 
         on
