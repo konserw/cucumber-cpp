@@ -21,6 +21,9 @@ matrix:
     - os: linux
       compiler: gcc
       env: GMOCK_VER=1.8.0 VALGRIND_TESTS=ON
+    - os: linux
+      compiler: gcc
+      env: GMOCK_VER=1.8.0 COVERALLS=ON
 
 addons:
   apt:
