@@ -2,6 +2,16 @@
 
 ### New Features
 
+None yet
+
+### Bugfixes
+
+None yet
+
+## [0.4](https://github.com/cucumber/cucumber-cpp/compare/v0.3.1...v0.4) (31 March 2017)
+
+### New Features
+
 * Support for MinGW build ([#130](https://github.com/cucumber/cucumber-cpp/pull/130) Michel Estermann)
 * Add support for Unix sockets ([#126](https://github.com/cucumber/cucumber-cpp/pull/126) Giel van Schijndel)
 * Add support for using ephemeral ports ([#131](https://github.com/cucumber/cucumber-cpp/pull/131) Giel van Schijndel)
@@ -14,6 +24,7 @@
 * Fixed suggested step definition when step sentence contains double quote ([#116](https://github.com/cucumber/cucumber-cpp/issues/116) Kamil Strzempowicz, [fbc49a3](https://github.com/cucumber/cucumber-cpp/commit/fbc49a34e12a0b9b2a6e121d97ba1ad8f46dce8f) Paolo Ambrosio)
 * Fixed `defs.hpp` deprecation warning on MSVC ([#124](https://github.com/cucumber/cucumber-cpp/pull/124) Antoine Allard)
 * Fixed parallel build ([#135](https://github.com/cucumber/cucumber-cpp/pull/135) Giel van Schijndel)
+* Fixed memory leaks and better memory management ([#134](https://github.com/cucumber/cucumber-cpp/pull/134) Giel van Schijndel)
 
 ## [0.3.1](https://github.com/cucumber/cucumber-cpp/compare/v0.3...v0.3.1) (11 April 2016)
 

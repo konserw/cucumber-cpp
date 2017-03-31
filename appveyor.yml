@@ -52,6 +52,14 @@ build_script:
 - cmd: cmake --build build
 
 test_script:
+- cmd: set CTEST_OUTPUT_ON_FAILURE=ON
 - cmd: cmake --build build --target test
 - cmd: cmake --build build --target features
 
+notifications:
+- provider: Email
+  to:
+  - '{{commitAuthorEmail}}'
+  on_build_success: false
+  on_build_failure: true
+  on_build_status_changed: true
