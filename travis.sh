@@ -18,7 +18,7 @@ cmake -E chdir build cmake \
     ${GMOCK_PATH:+"-DGMOCK_SRC_DIR=${GMOCK_PATH}"} \
     ..
 cmake --build build
-if [[ "${COVERALLS}" = "on" ]]; then cmake --build build --target coveralls; fi
+if [ "${COVERALLS}" = "ON" ]; then cmake --build build --target coveralls; fi
 cmake --build build --target test
 cmake --build build --target features
 
