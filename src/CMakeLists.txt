@@ -33,7 +33,9 @@ if(CMAKE_EXTRA_GENERATOR OR MSVC_IDE)
     list(APPEND CUKE_SOURCES ${CUKE_HEADERS})
 endif()
 
-set(COVER_SOURCES ${CUKE_SOURCES} PARENT_SCOPE)
+string(REGEX REPLACE "([^;]+)" "src/\\1" COVER_SOURCES "${CUKE_SOURCES}")
+set(COVER_SOURCES "${COVER_SOURCES}" PARENT_SCOPE)
+
 add_library(cucumber-cpp-nomain STATIC ${CUKE_SOURCES})
 add_library(cucumber-cpp STATIC ${CUKE_SOURCES} main.cpp)
 

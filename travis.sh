@@ -18,8 +18,11 @@ cmake -E chdir build cmake \
     ${GMOCK_PATH:+"-DGMOCK_SRC_DIR=${GMOCK_PATH}"} \
     ..
 cmake --build build
-if [ "${COVERALLS}" = "ON" ]; then cmake --build build --target coveralls; fi
-cmake --build build --target test
+if [ "${COVERALLS}" = "ON" ]
+    then cmake --build build --target coveralls
+else
+    cmake --build build --target test
+fi
 cmake --build build --target features
 
 GTEST=build/examples/Calc/GTestCalculatorSteps
