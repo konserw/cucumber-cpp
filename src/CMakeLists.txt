@@ -13,6 +13,7 @@ set(CUKE_SOURCES
     connectors/wire/WireServer.cpp
     connectors/wire/WireProtocol.cpp
     connectors/wire/WireProtocolCommands.cpp
+    PARENT_SCOPE
     )
 
 if(GTEST_FOUND)
