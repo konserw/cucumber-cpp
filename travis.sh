@@ -7,6 +7,9 @@ bundle install
 CTEST_OUTPUT_ON_FAILURE=ON
 export CTEST_OUTPUT_ON_FAILURE
 
+export COVERALLS_SERVICE_NAME=travis-ci
+export COVERALLS_REPO_TOKEN=ThdhpdagGJJVJj0KFGdSgdpzRLALbNAIg
+
 cmake -E make_directory build
 cmake -E chdir build cmake \
     -G Ninja \
@@ -22,18 +25,18 @@ if [ "${COVERALLS}" = "ON" ]
     then cmake --build build --target coveralls
 else
     cmake --build build --target test
-fi
-cmake --build build --target features
+    cmake --build build --target features
 
-GTEST=build/examples/Calc/GTestCalculatorSteps
-BOOST=build/examples/Calc/BoostCalculatorSteps
-if [ -f $GTEST ]; then
-    $GTEST >/dev/null &
-    cucumber examples/Calc
-    wait
-fi
-if [ -f $BOOST ]; then
-    $BOOST >/dev/null &
-    cucumber examples/Calc
-    wait
+    GTEST=build/examples/Calc/GTestCalculatorSteps
+    BOOST=build/examples/Calc/BoostCalculatorSteps
+    if [ -f $GTEST ]; then
+        $GTEST >/dev/null &
+        cucumber examples/Calc
+        wait
+    fi
+    if [ -f $BOOST ]; then
+        $BOOST >/dev/null &
+        cucumber examples/Calc
+        wait
+    fi
 fi
