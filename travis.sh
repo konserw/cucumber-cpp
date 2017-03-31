@@ -12,10 +12,12 @@ cmake -E chdir build cmake \
     -G Ninja \
     -DCUKE_ENABLE_EXAMPLES=on \
     ${VALGRIND_TESTS:+"-DVALGRIND_TESTS=${VALGRIND_TESTS}"} \
+    ${COVERALLS:+"-DCOVERALLS=${COVERALLS}"} \
     ${GMOCK_PATH:-"-DGMOCK_VER=${GMOCK_VER}"} \
     ${GMOCK_PATH:+"-DGMOCK_SRC_DIR=${GMOCK_PATH}"} \
     ..
 cmake --build build
+if [[ "${COVERALLS}" = "on" ]]; then cmake --build build --target coveralls; fi
 cmake --build build --target test
 cmake --build build --target features
 

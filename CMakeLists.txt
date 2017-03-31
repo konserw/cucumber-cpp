@@ -164,9 +164,8 @@ add_subdirectory(src)
 #
 
 if(COVERALLS)
-message("coverals sources: ${CUKE_SOURCES}")
 	coveralls_setup(
-        "${CUKE_SOURCES}" 
+        "${COVER_SOURCES}" 
         on
         "${PROJECT_SOURCE_DIR}/coveralls-cmake/cmake")
 endif()
