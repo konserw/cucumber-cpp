@@ -13,22 +13,28 @@ cmake -E chdir build cmake \
     -G Ninja \
     -DCUKE_ENABLE_EXAMPLES=on \
     ${VALGRIND_TESTS:+"-DVALGRIND_TESTS=${VALGRIND_TESTS}"} \
+    ${COVERAGE:+"-DCOVERAGE=${COVERAGE}"} \
+    ${COVERAGE:+"-DCMAKE_BUILD_TYPE=Debug"} \
     ${GMOCK_PATH:-"-DGMOCK_VER=${GMOCK_VER}"} \
     ${GMOCK_PATH:+"-DGMOCK_SRC_DIR=${GMOCK_PATH}"} \
     ..
 cmake --build build
-cmake --build build --target test
-cmake --build build --target features
+if [ "${COVERAGE}" = "ON" ]
+    then cmake --build build --target coverage
+else
+    cmake --build build --target test
+    cmake --build build --target features
 
-GTEST=build/examples/Calc/GTestCalculatorSteps
-BOOST=build/examples/Calc/BoostCalculatorSteps
-if [ -f $GTEST ]; then
-    $GTEST >/dev/null &
-    cucumber examples/Calc
-    wait
-fi
-if [ -f $BOOST ]; then
-    $BOOST >/dev/null &
-    cucumber examples/Calc
-    wait
+    GTEST=build/examples/Calc/GTestCalculatorSteps
+    BOOST=build/examples/Calc/BoostCalculatorSteps
+    if [ -f $GTEST ]; then
+        $GTEST >/dev/null &
+        cucumber examples/Calc
+        wait
+    fi
+    if [ -f $BOOST ]; then
+        $BOOST >/dev/null &
+        cucumber examples/Calc
+        wait
+    fi
 fi

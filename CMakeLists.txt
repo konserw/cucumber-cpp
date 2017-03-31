@@ -10,12 +10,22 @@ option(CUKE_DISABLE_UNIT_TESTS  "Disable unit tests" OFF)
 option(CUKE_DISABLE_E2E_TESTS   "Disable end-to-end tests" OFF)
 option(CUKE_ENABLE_EXAMPLES     "Enable the examples" OFF)
 option(VALGRIND_TESTS           "Run tests within Valgrind" OFF)
+option(COVERAGE                 "Run test coverage tests" OFF)
 option(CUKE_DISABLE_QT          "Disable using Qt framework" OFF)
 set(GMOCK_SRC_DIR "" CACHE STRING "Google Mock framework sources path (otherwise downloaded)")
 set(GMOCK_VER "1.7.0" CACHE STRING "Google Mock framework version to be used")
 
 set(ignoreMe "${QT_QMAKE_EXECUTABLE}") #supress warning
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
+set(CMAKE_MODULE_PATH
+    ${CMAKE_MODULE_PATH} 
+    ${PROJECT_SOURCE_DIR}/cmake/modules
+)
+
+if(COVERAGE)
+	include(CodeCoverage)
+    setup_target_for_coverage(coverage test coverage)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -pthread -g -O0 -fprofile-arcs -ftest-coverage")
+endif()
 
 #
 # Generic Compiler Flags
