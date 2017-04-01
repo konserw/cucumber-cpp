@@ -40,4 +40,3 @@ else
         wait
     fi
 fi
-cat build/gcda.log
