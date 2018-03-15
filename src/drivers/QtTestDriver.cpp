@@ -3,11 +3,15 @@
 #include <QtTest/QtTest>
 #include <QTextStream>
 #include <QTemporaryFile>
+#include <QCoreApplication>
 
 namespace cucumber {
 namespace internal {
 
 const InvokeResult QtTestStep::invokeStepBody() {
+    int argc = 0;
+    char* argv[] = { NULL };
+    QCoreApplication a(argc, &argv[0]);
     QTemporaryFile file;
     if (!file.open()) {
         return InvokeResult::failure("Unable to open temporary file needed for this test");
