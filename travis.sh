@@ -30,19 +30,6 @@ killXvfb () {
     fi
 }
 
-if [ -n "${FORMAT:-}" ]; then
-    # Reformat all code changed since this branch forked from the default branch
-    git fetch origin HEAD
-    if [ "${TRAVIS_PULL_REQUEST:-false}" = "false" ]; then
-        BASE_HEAD="$(git rev-parse FETCH_HEAD)"
-    else
-        BASE_HEAD="$(git merge-base FETCH_HEAD HEAD)"
-    fi
-    git clang-format-3.8 --binary=/usr/bin/clang-format-3.8 --style=file --commit="${BASE_HEAD}"
-    # Assert that all changes adhere to the asked for style
-    exec git diff --exit-code
-fi
-
 CTEST_OUTPUT_ON_FAILURE=ON
 export CTEST_OUTPUT_ON_FAILURE
 
@@ -58,11 +45,7 @@ cmake -E chdir build cmake \
     -G Ninja \
     -DCUKE_ENABLE_EXAMPLES=on \
     ${CMAKE_PREFIX_PATH:+"-DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}"} \
-    ${COVERALLS_SERVICE_NAME:+"-DCMAKE_BUILD_TYPE=Debug"} \
-    ${COVERALLS_SERVICE_NAME:+"-DCMAKE_CXX_FLAGS='--coverage'"} \
-    ${VALGRIND_TESTS:+"-DVALGRIND_TESTS=${VALGRIND_TESTS}"} \
     ${GMOCK_PATH:-"-DGMOCK_VER=${GMOCK_VER}"} \
-    ${GMOCK_PATH:+"-DGMOCK_SRC_DIR=${GMOCK_PATH}"} \
     ..
 cmake --build build
 cmake --build build --target test
