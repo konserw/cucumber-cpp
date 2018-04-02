@@ -10,7 +10,7 @@ namespace internal {
 
 const InvokeResult QtTestStep::invokeStepBody() {
     int argc = 0;
-    char* argv[] = { NULL };
+    char* argv[] = {NULL};
     QCoreApplication a(argc, &argv[0]);
     QTemporaryFile file;
     if (!file.open()) {

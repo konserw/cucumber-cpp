@@ -47,6 +47,7 @@ cmake -E chdir build cmake \
     ..
 cmake --build build
 cmake --build build --target test
+mkdir /home/runner/cucumber-cpp/build/tmp/
 cmake --build build --target features
 
 startXvfb # Start virtual X display server
