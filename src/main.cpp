@@ -8,7 +8,6 @@
 #include <QCoreApplication>
 #endif
 
-
 namespace {
 
 void acceptWireProtocol(const std::string& host, int port, const std::string& unixPath, bool verbose) {
