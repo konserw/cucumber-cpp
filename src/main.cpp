@@ -6,6 +6,8 @@
 #include <boost/scoped_ptr.hpp>
 #ifdef QT_CORE_LIB
 #include <QCoreApplication>
+#else
+#error QT_CORE_LIB not declared?
 #endif
 
 namespace {
