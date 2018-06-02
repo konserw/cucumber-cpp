@@ -1,0 +1,17 @@
+{
+   qrand_in_qttestdriver
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:_Z5qrandv
+   obj:/usr/lib/x86_64-linux-gnu/libQt5Core.so.5.2.1
+   fun:_ZN5QFile4openE6QFlagsIN9QIODevice12OpenModeFlagEE
+   fun:_ZN14QTemporaryFile4openE6QFlagsIN9QIODevice12OpenModeFlagEE
+   fun:_ZN14QTemporaryFile4openEv
+   fun:_ZN8cucumber8internal10QtTestStep14invokeStepBodyEv
+   fun:_ZN16QtTestStepDouble14invokeStepBodyEv
+   fun:_ZN16QtTestDriverTest26stepInvocationRunsStepBodyEv
+   fun:_ZN16QtTestDriverTest11runAllTestsEv
+   fun:_ZN8cucumber8internal10DriverTest3runEv
+   fun:main
+}
