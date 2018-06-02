@@ -35,7 +35,7 @@ install:
 - set PATH=C:\Ruby200\bin;%BOOST_LIBRARYDIR%;%PATH%
 - gem install bundle
 - bundle install
-# - set PATH=%QT_DIR%;%QT_DIR%\bin;%PATH%
+- set PATH=%QT_DIR%;%QT_DIR%\bin;%PATH%
 - if defined MINGW_ROOT set PATH=%MINGW_ROOT%\bin;C:\msys64\usr\bin\;%PATH%
 - if defined MINGW_ARCH bash -lc "pacman --needed --noconfirm -S mingw-w64-%MINGW_ARCH%-boost"
 - if defined MSVC_ARCH call "%VS140COMNTOOLS%\..\..\VC\vcvarsall.bat" %MSVC_ARCH%
