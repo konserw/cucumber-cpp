@@ -35,16 +35,15 @@ install:
 - set PATH=C:\Ruby200\bin;%BOOST_LIBRARYDIR%;%PATH%
 - gem install bundle
 - bundle install
-- set PATH=%QT_DIR%;%QT_DIR%\bin;%PATH%
+- if defined QT_DIR set PATH=%QT_DIR%;%QT_DIR%\bin;%PATH%
+- if defined QT_DIR set CMAKE_PREFIX_PATH=%QT_DIR%\lib\cmake
 - if defined MINGW_ROOT set PATH=%MINGW_ROOT%\bin;C:\msys64\usr\bin\;%PATH%
 - if defined MINGW_ARCH bash -lc "pacman --needed --noconfirm -S mingw-w64-%MINGW_ARCH%-boost"
 - if defined MSVC_ARCH call "%VS140COMNTOOLS%\..\..\VC\vcvarsall.bat" %MSVC_ARCH%
 
 build_script:
-- echo "========= PATH ============"
-- echo %PATH%
 - cmake -E make_directory build
-- cmake -E chdir build cmake -G "%CMAKE_GENERATOR%" -DCUKE_ENABLE_EXAMPLES=ON -DBUILD_SHARED_LIBS=ON -DBOOST_ROOT="%BOOST_ROOT%" -DBOOST_INCLUDEDIR="%BOOST_INCLUDEDIR%" -DBOOST_LIBRARYDIR="%BOOST_LIBRARYDIR%" -DCMAKE_PREFIX_PATH="%QT_DIR%" ..
+- cmake -E chdir build cmake -G "%CMAKE_GENERATOR%" -DCUKE_ENABLE_EXAMPLES=ON -DBUILD_SHARED_LIBS=ON -DBOOST_ROOT="%BOOST_ROOT%" -DBOOST_INCLUDEDIR="%BOOST_INCLUDEDIR%" -DBOOST_LIBRARYDIR="%BOOST_LIBRARYDIR%" -DCMAKE_PREFIX_PATH="%CMAKE_PREFIX_PATH%" ..
 - cmake --build build
 
 test_script:
