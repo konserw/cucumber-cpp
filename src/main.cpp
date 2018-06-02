@@ -5,6 +5,11 @@
 #include <iostream>
 #include <boost/program_options.hpp>
 #include <boost/scoped_ptr.hpp>
+#ifdef QT_CORE_LIB
+#include <QCoreApplication>
+#else
+#error QT_CORE_LIB not declared?
+#endif
 
 namespace {
 
@@ -41,6 +46,9 @@ void acceptWireProtocol(const std::string& host, int port, const std::string& un
 }
 
 int CUCUMBER_CPP_EXPORT main(int argc, char** argv) {
+#ifdef QT_CORE_LIB
+    QCoreApplication a(argc, argv);
+#endif
     using boost::program_options::value;
     boost::program_options::options_description optionDescription("Allowed options");
     optionDescription.add_options()
