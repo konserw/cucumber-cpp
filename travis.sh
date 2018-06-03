@@ -43,6 +43,8 @@ if [ -n "${FORMAT:-}" ]; then
     exec git diff --exit-code
 fi
 
+startXvfb # Start virtual X display server
+
 CTEST_OUTPUT_ON_FAILURE=ON
 export CTEST_OUTPUT_ON_FAILURE
 
@@ -70,7 +72,6 @@ cmake --build build
 cmake --build build --target test
 cmake --build build --target features
 
-startXvfb # Start virtual X display server
 
 for TEST in \
     build/examples/Calc/GTestCalculatorSteps \
