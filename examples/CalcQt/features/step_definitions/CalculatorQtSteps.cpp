@@ -7,14 +7,8 @@
 
 /// Helper class to ensure that QApplication gets destroyed before main() returns
 /// and that CalculatorWidget gets destroyed before QApplication gets destroyed.
+/// It is not necessary if cucumber has been built with QtTest driver, as in that case QApplication is created in cucumber's main()
 struct CalculatorCtx {
-    CalculatorCtx()
-      : argc(0)
-      , app(argc, NULL)
-    {}
-
-    int argc;
-    QApplication app;
     CalculatorWidget calculator;
 };
 
@@ -37,9 +31,9 @@ GIVEN("^I just turned on the calculator$") {
     ctx->calculator.move(0, 0);
     ctx->calculator.show();
 #if QT_VERSION >= 0x050000
-    const bool window_shown = QTest::qWaitForWindowExposed(&ctx->calculator, 30000);
+    const bool window_shown = QTest::qWaitForWindowExposed(&ctx->calculator);
 #else
-    const bool window_shown = QTest::qWaitForWindowShown(&ctx->calculator, 30000);
+    const bool window_shown = QTest::qWaitForWindowShown(&ctx->calculator);
 #endif
     ASSERT_TRUE(window_shown);
     QTest::qWait(millisecondsToWait());

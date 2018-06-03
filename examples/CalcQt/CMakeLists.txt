@@ -8,26 +8,27 @@ if(TARGET Qt::Core AND TARGET Qt::Gui AND TARGET Qt::Widgets AND TARGET Qt::Test
         PUBLIC
             Qt::Core
             Qt::Widgets
+            Qt::Test
         PRIVATE
             Qt::Gui
     )
 
     add_executable(calcqt src/CalcQt.cpp)
-    target_link_libraries(calcqt PRIVATE libcalcqt Qt::Widgets)
+    target_link_libraries(calcqt PRIVATE libcalcqt)
 
-    if(Qt::Test)
+    if(TARGET Qt::Test)
         add_executable(QtTestCalculatorQtSteps features/step_definitions/QtTestCalculatorQtSteps)
-        target_link_libraries(QtTestCalculatorQtSteps PRIVATE libcalcqt Qt::Test cucumber-cpp)
+        target_link_libraries(QtTestCalculatorQtSteps PRIVATE libcalcqt cucumber-cpp)
     endif()
 
     if(TARGET Boost::unit_test_framework)
         add_executable(BoostCalculatorQtSteps features/step_definitions/BoostCalculatorQtSteps.cpp)
-        target_link_libraries(BoostCalculatorQtSteps PRIVATE libcalcqt Boost::unit_test_framework cucumber-cpp Qt::Test)
+        target_link_libraries(BoostCalculatorQtSteps PRIVATE libcalcqt Boost::unit_test_framework cucumber-cpp)
     endif()
 
     if(TARGET GTest::GTest)
         add_executable(GTestCalculatorQtSteps features/step_definitions/GTestCalculatorQtSteps)
-        target_link_libraries(GTestCalculatorQtSteps PRIVATE libcalcqt cucumber-cpp GTest::GTest Qt::Test)
+        target_link_libraries(GTestCalculatorQtSteps PRIVATE libcalcqt cucumber-cpp GTest::GTest)
     endif()
 
 endif()
