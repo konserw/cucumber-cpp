@@ -93,7 +93,7 @@ for TEST in \
 ; do
     if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
         "${TEST}" 2> /dev/null &
-        sleep 1
+        sleep 3
         cucumber examples/CalcQt
         wait %
     fi
