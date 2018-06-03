@@ -207,7 +207,7 @@ endif()
 
 if(VALGRIND_TESTS)
     find_package(Valgrind REQUIRED)
-    set(VALGRIND_ARGS --error-exitcode=2 --leak-check=full --undef-value-errors=no --supressions=valgrind.supp)
+    set(VALGRIND_ARGS --error-exitcode=2 --leak-check=full --undef-value-errors=no --suppressions=${PROJECT_SOURCE_DIR}/valgrind.supp)
     if(NOT VALGRIND_VERSION_STRING VERSION_LESS 3.9)
         # Valgrind 3.9 no longer shows all leaks unless asked to
         list(APPEND VALGRIND_ARGS --show-leak-kinds=all)
