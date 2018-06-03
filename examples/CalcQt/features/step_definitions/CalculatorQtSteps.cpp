@@ -37,9 +37,9 @@ GIVEN("^I just turned on the calculator$") {
     ctx->calculator.move(0, 0);
     ctx->calculator.show();
 #if QT_VERSION >= 0x050000
-    const bool window_shown = QTest::qWaitForWindowExposed(&ctx->calculator);
+    const bool window_shown = QTest::qWaitForWindowExposed(&ctx->calculator, 30000);
 #else
-    const bool window_shown = QTest::qWaitForWindowShown(&ctx->calculator);
+    const bool window_shown = QTest::qWaitForWindowShown(&ctx->calculator, 30000);
 #endif
     ASSERT_TRUE(window_shown);
     QTest::qWait(millisecondsToWait());
